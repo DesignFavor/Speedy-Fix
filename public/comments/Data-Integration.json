@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "soundFile": "D:\\Speedy Consultics Update again\\public\\comments\\Data-Integration.ogg",
+    "duration": 2.58
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.31, "value": "X" },
+    { "start": 0.31, "end": 0.40, "value": "B" },
+    { "start": 0.40, "end": 0.54, "value": "E" },
+    { "start": 0.54, "end": 0.61, "value": "F" },
+    { "start": 0.61, "end": 0.75, "value": "G" },
+    { "start": 0.75, "end": 1.17, "value": "B" },
+    { "start": 1.17, "end": 1.24, "value": "C" },
+    { "start": 1.24, "end": 1.73, "value": "B" },
+    { "start": 1.73, "end": 1.83, "value": "D" },
+    { "start": 1.83, "end": 1.87, "value": "C" },
+    { "start": 1.87, "end": 2.08, "value": "A" },
+    { "start": 2.08, "end": 2.58, "value": "X" }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "soundFile": "D:\\Speedy Consultics update\\public\\comments\\Bye-Bye.ogg",
+    "duration": 1.25
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.01, "value": "X" },
+    { "start": 0.01, "end": 0.09, "value": "A" },
+    { "start": 0.09, "end": 0.16, "value": "C" },
+    { "start": 0.16, "end": 0.23, "value": "A" },
+    { "start": 0.23, "end": 0.35, "value": "C" },
+    { "start": 0.35, "end": 0.56, "value": "B" },
+    { "start": 0.56, "end": 0.63, "value": "F" },
+    { "start": 0.63, "end": 0.70, "value": "C" },
+    { "start": 0.70, "end": 0.98, "value": "B" },
+    { "start": 0.98, "end": 1.25, "value": "X" }
+  ]
+}

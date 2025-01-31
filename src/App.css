@@ -1,0 +1,105 @@
+#root {
+  margin: 0;
+}
+
+
+
+
+.button-container {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 5px 10px; /* Added gap of 10px between buttons */
+  transition: transform 0.1s ease-in-out;
+}
+
+.icon {
+  width: 100px;
+  height: auto;
+}
+
+.quit-icon {
+  position: absolute;
+  width: 60px;
+    height: auto;
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  margin-bottom: 50px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+  /* Additional styling as needed */
+}
+
+
+
+
+.modal.show {
+  opacity: 1;
+}
+
+
+
+
+
+
+.toggle-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.toggle input {
+  margin-right: 10px;
+}
+
+.toggle label {
+  font-family: 'Comic Sans MS', cursive, sans-serif; /* Cartoonish font */
+  font-size: 16px;
+}
