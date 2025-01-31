@@ -21,7 +21,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // API route to send email
-app.post('/api/send-email', (req, res) => {
+app.post('/send-email', (req, res) => {
   const { name, email, message, droppedObjects } = req.body;
 
   console.log('Request body:', req.body);
