@@ -157,7 +157,7 @@ const CartPopup = ({
             style={styles.input}
           />
           <textarea
-            placeholder="Nachricht "
+            placeholder="Nachricht"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             style={styles.input}
