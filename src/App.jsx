@@ -1,6 +1,6 @@
 import React, { useState, Suspense, useRef, useEffect } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
-import { PerspectiveCamera, Environment } from '@react-three/drei';
+import { PerspectiveCamera, Environment, useProgress } from '@react-three/drei';
 import { EffectComposer, N8AO, Bloom } from '@react-three/postprocessing';
 import SoundManager from './SoundManager';
 import Scene from './Scene';
@@ -10,7 +10,6 @@ import * as THREE from 'three';
 import './App.css';
 import { Preloader } from './assets/Preloader';
 import SubtitleComponent from './assets/SubtitleComponent';
-
 
 function App() {
   const [playPackingAndBox, setPlayPackingAndBox] = useState(false);
@@ -28,6 +27,13 @@ function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isSubtitleVisible, setIsSubtitleVisible] = useState(false);
 
+  const { progress } = useProgress();
+
+  useEffect(() => {
+    if (progress === 100) {
+      setLoading(false);
+    }
+  }, [progress]);
 
   const handleCartClick = () => {
     setPlayPackingAndBox(true);
@@ -78,7 +84,6 @@ function App() {
     setByeAnimation(true);
     soundManager.handleClickSound();
     
-  
     setTimeout(() => {
       setByeAnimation(false);
       window.location.href = '/goodbye'; 
@@ -88,8 +93,6 @@ function App() {
       lipsyncControlRef.current.playByeByeAudio();
     }
   };
-
-
 
   const handleInfoClick = () => {
     soundManager.handleClickSound();
@@ -103,16 +106,6 @@ function App() {
     gl.toneMappingExposure = 1;
     return null;
   };
-
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
 
   useEffect(() => {
     const handleResize = () => {
@@ -130,13 +123,13 @@ function App() {
         <Suspense fallback={null}>
           <EffectComposer >
             <N8AO  aoRadius={1} />
-            <Bloom luminanceThreshold={1} luminanceSmoothing={1} />
+            <Bloom luminanceThreshold={1} luminanceSmoothing={1} intensity={0.5}/>
           </EffectComposer>
           <PerspectiveCamera
-      makeDefault
-      position={isMobile ? [-4, 3, -5] : [-4, 3, -4]} 
-      fov={isMobile ? 60 : 45} 
-      rotation={[0.05, 3.15, 0]}
+            makeDefault
+            position={isMobile ? [-4, 3, -5] : [-4, 3, -4]} 
+            fov={isMobile ? 60 : 45} 
+            rotation={[0.05, 3.15, 0]}
           />
           <Environment preset="night" intensity={1} background={true} />
           <Scene
@@ -146,74 +139,67 @@ function App() {
             playHappyAnimation={playHappyAnimation}
             onDroppedObjectsChange={setDroppedObjects}
           />
-        
           <LipsyncControl ref={lipsyncControlRef} nodes={{}} />
         </Suspense>
-        
       </Canvas>
 
-
-
       <div className="button-container">
-  <button
-    className="button"
-    onClick={handleResetClick}
-    onMouseDown={handleMouseDown}
-    onMouseUp={handleMouseUp}
-  >
-    <img src="/reset.png" alt="Reset" className="icon" />
-  </button>
-  <button
-    className="button"
-    onClick={handleCartClick}
-    onMouseDown={handleMouseDown}
-    onMouseUp={handleMouseUp}
-  >
-    <img src="/cart.png" alt="Cart" className="icon" />
-  </button>
-</div>
+        <button
+          className="button"
+          onClick={handleResetClick}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+        >
+          <img src="/reset.png" alt="Reset" className="icon" />
+        </button>
+        <button
+          className="button"
+          onClick={handleCartClick}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+        >
+          <img src="/cart.png" alt="Cart" className="icon" />
+        </button>
+      </div>
 
-<img
-  src="/Quit.png"
-  alt="Quit"
-  className="quit-icon"
-  id="quit-button"
-  style={{ top: '10px', left: '10px', position: 'absolute' }}
-  onClick={handleQuitClick}
-  onMouseDown={handleMouseDown}
-  onMouseUp={handleMouseUp}
-/>
+      <img
+        src="/Quit.png"
+        alt="Quit"
+        className="quit-icon"
+        id="quit-button"
+        style={{ top: '10px', left: '10px', position: 'absolute' }}
+        onClick={handleQuitClick}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+      />
 
-<img
-  src="/info.png"
-  alt="Info-icon"
-  className="quit-icon"
-  id="Info-button"
-  style={{ top: '10px', right: '10px', position: 'absolute' }}
-  onClick={handleInfoClick}
-  onMouseDown={handleMouseDown}
-  onMouseUp={handleMouseUp}
-/>
+      <img
+        src="/info.png"
+        alt="Info-icon"
+        className="quit-icon"
+        id="Info-button"
+        style={{ top: '10px', right: '10px', position: 'absolute' }}
+        onClick={handleInfoClick}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+      />
 
-<div style={{
-  position: 'absolute',
-  alignContent: 'center',
-  bottom: '100px',
-  width: '70%',
-  textAlign: 'center',
-  color: 'white',
-  fontFamily: 'Arial, sans-serif',
-  fontSize: isMobile ? '12px': "16px",
-}}>
-  Ziehen Sie alle benötigten Teile via Drag and Drop in die Box, tragen Sie Ihre E-Mail-Adresse ein und wir melden uns zeitnah bei Ihnen. Via Klick auf den Infobutton oben rechts erfahren Sie mehr über die Lego-Teile.
-</div>
+      <div style={{
+        position: 'absolute',
+        alignContent: 'center',
+        bottom: '100px',
+        width: '70%',
+        textAlign: 'center',
+        color: 'white',
+        fontFamily: 'Arial, sans-serif',
+        fontSize: isMobile ? '12px': "16px",
+      }}>
+        Ziehen Sie alle benötigten Teile via Drag and Drop in die Box, tragen Sie Ihre E-Mail-Adresse ein und wir melden uns zeitnah bei Ihnen. Via Klick auf den Infobutton oben rechts erfahren Sie mehr über die Lego-Teile.
+      </div>
 
-
-{isSubtitleVisible && (
-
+      {isSubtitleVisible && (
         <SubtitleComponent />
-
-    )}
+      )}
 
       <CartPopup
         showPopup={showPopup}
@@ -227,7 +213,6 @@ function App() {
         droppedObjects={droppedObjects}
         handleHappyAnimation={handleHappyClick}
       />
-
 
       {loading && (
         <Preloader
