@@ -130,12 +130,12 @@ function App() {
         <Suspense fallback={null}>
           <EffectComposer >
             <N8AO  aoRadius={1} />
-            <Bloom luminanceThreshold={1.5} luminanceSmoothing={2} height={300} />
+            <Bloom luminanceThreshold={1} luminanceSmoothing={1} />
           </EffectComposer>
           <PerspectiveCamera
       makeDefault
       position={isMobile ? [-4, 3, -5] : [-4, 3, -4]} 
-      fov={isMobile ? 70 : 45} 
+      fov={isMobile ? 60 : 45} 
       rotation={[0.05, 3.15, 0]}
           />
           <Environment preset="night" intensity={1} background={true} />
@@ -155,45 +155,59 @@ function App() {
 
 
       <div className="button-container">
-        <button
-          className="button"
-          onClick={handleResetClick}
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-        >
-          <img src="/reset.png" alt="Reset" className="icon" />
-        </button>
-        <button
-          className="button"
-          onClick={handleCartClick}
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-        >
-          <img src="/cart.png" alt="Cart" className="icon" />
-        </button>
-      </div>
-
-      <img
-        src="/Quit.png"
-        alt="Quit"
-        className="quit-icon"
-        id="quit-button"
-        style={{ top: '10px', left: '10px', position: 'absolute' }}
-        onClick={handleQuitClick}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-      />
+  <button
+    className="button"
+    onClick={handleResetClick}
+    onMouseDown={handleMouseDown}
+    onMouseUp={handleMouseUp}
+  >
+    <img src="/reset.png" alt="Reset" className="icon" />
+  </button>
+  <button
+    className="button"
+    onClick={handleCartClick}
+    onMouseDown={handleMouseDown}
+    onMouseUp={handleMouseUp}
+  >
+    <img src="/cart.png" alt="Cart" className="icon" />
+  </button>
+</div>
 
 <img
-        src="/info.png"
-        alt="Info-icon"
-        className="Info-icon"
-        id="Info-button"
-        style={{ top: '10px', right: '10px', position: 'absolute' }}
-        onClick={handleInfoClick}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-      />
+  src="/Quit.png"
+  alt="Quit"
+  className="quit-icon"
+  id="quit-button"
+  style={{ top: '10px', left: '10px', position: 'absolute' }}
+  onClick={handleQuitClick}
+  onMouseDown={handleMouseDown}
+  onMouseUp={handleMouseUp}
+/>
+
+<img
+  src="/info.png"
+  alt="Info-icon"
+  className="quit-icon"
+  id="Info-button"
+  style={{ top: '10px', right: '10px', position: 'absolute' }}
+  onClick={handleInfoClick}
+  onMouseDown={handleMouseDown}
+  onMouseUp={handleMouseUp}
+/>
+
+<div style={{
+  position: 'absolute',
+  alignContent: 'center',
+  bottom: '100px',
+  width: '70%',
+  textAlign: 'center',
+  color: 'white',
+  fontFamily: 'Arial, sans-serif',
+  fontSize: isMobile ? '12px': "16px",
+}}>
+  Ziehen Sie alle benötigten Teile via Drag and Drop in die Box, tragen Sie Ihre E-Mail-Adresse ein und wir melden uns zeitnah bei Ihnen. Via Klick auf den Infobutton oben rechts erfahren Sie mehr über die Lego-Teile.
+</div>
+
 
 {isSubtitleVisible && (
 

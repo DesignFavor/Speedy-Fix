@@ -93,7 +93,6 @@ const LipsyncControl = forwardRef(({ nodes }, ref) => {
       app: "Custom-App",
       data: "Data-Integration",
       notdealing: "Management-Overhead",
-      notdealing2: "Management-Overhead",
     };
 
     const newScript = audioMap[objectName];
@@ -108,9 +107,11 @@ const LipsyncControl = forwardRef(({ nodes }, ref) => {
       const pointer = new THREE.Vector2();
 
       if (event.touches) {
+        // Handle touch events
         pointer.x = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
         pointer.y = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
       } else {
+        // Handle mouse events
         pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
         pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
       }
@@ -124,6 +125,7 @@ const LipsyncControl = forwardRef(({ nodes }, ref) => {
       }
     };
 
+    // Add event listeners for both mouse and touch events
     window.addEventListener("click", handlePointerEvent);
     window.addEventListener("touchstart", handlePointerEvent);
 

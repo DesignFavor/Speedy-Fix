@@ -9,7 +9,7 @@ function SpeedyCharacter({
   playByeAnimation,
   playHappyAnimation,
 }) {
-  const { scene, animations, nodes, materials, action } = useGLTF('/model/speedyupdate.glb');
+  const { scene, animations, nodes, materials, action } = useGLTF('/model/speedy.glb');
   const mixer = useRef(new THREE.AnimationMixer(scene));
   const previousAction = useRef(null);
   const clock = useRef(new THREE.Clock());

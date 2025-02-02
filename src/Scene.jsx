@@ -18,7 +18,6 @@ function Scene({ playPackingAndBox, triggerReset, playByeAnimation, onDroppedObj
       scene.getObjectByName('Service'),
       scene.getObjectByName('Sale'),
       scene.getObjectByName('app'),
-      scene.getObjectByName('notdealing2'),
       scene.getObjectByName('notdealing'),
     ].filter(Boolean);
 
@@ -101,8 +100,8 @@ function Scene({ playPackingAndBox, triggerReset, playByeAnimation, onDroppedObj
         position={[-8.2, 6.4, 1.8]}
         rotation={[-Math.PI / 0, 0, 0]}
         castShadow
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
+        shadow-mapSize-width={1024}
+        shadow-mapSize-height={1024}
         shadow-bias={-0.0005}
       />
       <SpeedyCharacter
