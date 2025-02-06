@@ -4,7 +4,7 @@ import { Box3 } from 'three';
 import SpeedyCharacter from './assets/Speedy';
 import { DragControls } from 'three/examples/jsm/controls/DragControls';
 
-function Scene({ playPackingAndBox, triggerReset, playByeAnimation, onDroppedObjectsChange , playHappyAnimation  }) {
+function Scene({ playPackingAndBox, triggerReset, playByeAnimation, onDroppedObjectsChange, playHappyAnimation }) {
   const { gl, scene, camera } = useThree();
   const dragControlsRef = useRef();
   const targetBox = useRef();
@@ -14,8 +14,8 @@ function Scene({ playPackingAndBox, triggerReset, playByeAnimation, onDroppedObj
   useEffect(() => {
     const draggableObjects = [
       scene.getObjectByName('Marketing'),
-      scene.getObjectByName('data'),
       scene.getObjectByName('Service'),
+      scene.getObjectByName('data'),
       scene.getObjectByName('Sale'),
       scene.getObjectByName('app'),
       scene.getObjectByName('notdealing'),

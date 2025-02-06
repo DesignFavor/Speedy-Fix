@@ -88,8 +88,8 @@ const LipsyncControl = forwardRef(({ nodes }, ref) => {
   const handleObjectClick = (objectName) => {
     const audioMap = {
       Marketing: "Marketing",
-      Sale: "Sales",
       Service: "Service",
+      Sale: "Sales",
       app: "Custom-App",
       data: "Data-Integration",
       notdealing: "Management-Overhead",

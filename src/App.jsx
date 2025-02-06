@@ -187,7 +187,7 @@ function App() {
       <div style={{
         position: 'absolute',
         alignContent: 'center',
-        bottom: '100px',
+        top: '100px',
         width: '70%',
         textAlign: 'center',
         color: 'white',
