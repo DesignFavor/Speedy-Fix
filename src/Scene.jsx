@@ -8,6 +8,8 @@ function Scene({ playPackingAndBox, triggerReset, playByeAnimation, onDroppedObj
   const { gl, scene, camera } = useThree();
   const dragControlsRef = useRef();
   const targetBox = useRef();
+  const floorBox = useRef();
+  const monitorBox = useRef();
   const originalPositions = useRef({});
   const [triggerSendAnimation, setTriggerSendAnimation] = useState(false);
 
@@ -22,6 +24,16 @@ function Scene({ playPackingAndBox, triggerReset, playByeAnimation, onDroppedObj
     ].filter(Boolean);
 
     targetBox.current = scene.getObjectByName('PaperBox_PaperBox_0');
+    const floorObject = scene.getObjectByName('floor003');
+    const monitorObject = scene.getObjectByName('monitor2');
+
+    if (floorObject) {
+      floorBox.current = new Box3().setFromObject(floorObject);
+    }
+
+    if (monitorObject) {
+      monitorBox.current = new Box3().setFromObject(monitorObject);
+    }
 
     draggableObjects.forEach((obj) => {
       if (!originalPositions.current[obj.name]) {
@@ -37,6 +49,22 @@ function Scene({ playPackingAndBox, triggerReset, playByeAnimation, onDroppedObj
         event.object.material.opacity = 0.5;
       });
 
+      dragControls.addEventListener('drag', (event) => {
+        if (floorBox.current) {
+          const objectBox = new Box3().setFromObject(event.object);
+          if (floorBox.current.intersectsBox(objectBox)) {
+            event.object.position.copy(originalPositions.current[event.object.name]);
+          }
+        }
+
+        if (monitorBox.current) {
+          const objectBox = new Box3().setFromObject(event.object);
+          if (monitorBox.current.intersectsBox(objectBox)) {
+            event.object.position.copy(originalPositions.current[event.object.name]);
+          }
+        }
+      });
+
       dragControls.addEventListener('dragend', (event) => {
         event.object.material.transparent = false;
         event.object.material.opacity = 1;
@@ -47,7 +75,6 @@ function Scene({ playPackingAndBox, triggerReset, playByeAnimation, onDroppedObj
 
           onDroppedObjectsChange((prev) => {
             const newDroppedObjects = [...prev, event.object.name];
-            console.log('Dropped Objects:', newDroppedObjects);
             return newDroppedObjects;
           });
 

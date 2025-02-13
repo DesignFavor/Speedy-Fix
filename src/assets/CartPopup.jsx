@@ -24,8 +24,6 @@ const CartPopup = ({
         return false;
       }
   
-      console.log("Objects to send:", droppedObjects);
-  
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/send-email`, {
         name,
         email,

@@ -9,7 +9,7 @@ function SpeedyCharacter({
   playByeAnimation,
   playHappyAnimation,
 }) {
-  const { scene, animations, nodes, materials, action } = useGLTF('/scene/speedyupdate.gltf');
+  const { scene, animations, nodes, materials, action } = useGLTF('/scene/speedyupdate-cube2.glb');
   const mixer = useRef(new THREE.AnimationMixer(scene));
   const previousAction = useRef(null);
   const clock = useRef(new THREE.Clock());
@@ -45,8 +45,6 @@ function SpeedyCharacter({
         mesh.morphTargetDictionary = nodes[name].morphTargetDictionary;
         mesh.morphTargetInfluences = nodes[name].morphTargetInfluences;
 
-        console.log(`Morph Targets for ${name}:`, mesh.morphTargetDictionary);
-
         facialGroup.add(mesh);
       }
     });
@@ -56,7 +54,6 @@ function SpeedyCharacter({
   
 
   useEffect(() => {
-    console.log("Available animations:", animations.map(clip => clip.name));
 
     scene.traverse((child) => {
       if (child.isMesh) {
@@ -91,8 +88,6 @@ function SpeedyCharacter({
         action.reset().setLoop(THREE.LoopOnce).clampWhenFinished = true;
         action.fadeIn(fadeOutDuration).play();
         previousAction.current = action;
-
-        console.log("Playing animation:", clip.name);
       });
     }
   }, [playPackingAndBox, animations]);
@@ -107,13 +102,11 @@ useEffect(() => {
     if (boxAction) {
       boxAction.stop(); 
       boxAction.reset(); 
-      console.log('Box animation has been reset.');
     }
   }
 }, [triggerReset, animations]);
 
 
-////////////////// Bye Animation       //////////////
     useEffect(() => {
       if (playByeAnimation) {
         if (previousAction.current) {
@@ -127,15 +120,11 @@ useEffect(() => {
           byeAction.fadeIn(fadeOutDuration).play();
           previousAction.current = byeAction;
     
-          console.log("Playing 'Bye' animation:", byeClip.name);
         } else {
-          console.warn('Bye animation not found.');
         }
       }
     }, [playByeAnimation, animations, action]);
 
-
-    ////////////// Happy animation //////////////
     useEffect(() => {
       if (playHappyAnimation) {
         if (previousAction.current) {
@@ -149,14 +138,11 @@ useEffect(() => {
           HappyAction.fadeIn(fadeOutDuration).play();
           previousAction.current = HappyAction;
     
-          console.log("Playing 'Ahhyes' animation:", HappyClip.name);
         } else {
-          console.warn('Bye animation not found.');
         }
       }
     }, [playHappyAnimation, animations, action]);
 
-    ////////////////
     useEffect(() => {
       const animate = () => {
         const delta = clock.current.getDelta();
@@ -166,7 +152,7 @@ useEffect(() => {
           const isRunning = previousAction.current.isRunning();
     
           if (!isRunning) {
-            // Stop the happyAction when new animations are about to play
+
             const happyAction = mixer.current.clipAction(
               animations.find((clip) => clip.name === 'Action')
             );
@@ -184,8 +170,7 @@ useEffect(() => {
             typingAction.reset().fadeIn(fadeOutDuration).play();
             eyeBlinkAction.reset().fadeIn(fadeOutDuration).play();
             previousAction.current = typingAction;
-    
-            console.log("Playing animations:", 'TypingAnimation', 'EyeBlink');
+            
           }
         }
     

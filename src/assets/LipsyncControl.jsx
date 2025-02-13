@@ -29,7 +29,7 @@ const LipsyncControl = forwardRef(({ nodes }, ref) => {
     const newAudio = new Audio(`/comments/${script}.ogg`);
     setAudio(newAudio);
 
-    if (playAudio) {
+    if (playAudio && newAudio.paused) {
       newAudio.play().catch((error) => console.warn("Playback error:", error));
     }
 
@@ -125,9 +125,8 @@ const LipsyncControl = forwardRef(({ nodes }, ref) => {
       }
     };
 
-    // Add event listeners for both mouse and touch events
     window.addEventListener("click", handlePointerEvent);
-    window.addEventListener("touchstart", handlePointerEvent);
+    window.addEventListener("touchstart", handlePointerEvent, { passive: false });
 
     return () => {
       window.removeEventListener("click", handlePointerEvent);

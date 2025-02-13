@@ -1,4 +1,4 @@
-import React, { useState, Suspense, useRef, useEffect } from 'react';
+import React, { useState, Suspense, useRef, useEffect, memo } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { PerspectiveCamera, Environment, useProgress } from '@react-three/drei';
 import { EffectComposer, N8AO, Bloom } from '@react-three/postprocessing';
@@ -96,7 +96,7 @@ function App() {
 
   const handleInfoClick = () => {
     soundManager.handleClickSound();
-    setIsSubtitleVisible(prev => !prev); // Toggle visibility
+    setIsSubtitleVisible(prev => !prev);
   };
 
   const SetupRenderer = () => {
@@ -118,12 +118,16 @@ function App() {
 
   return (
     <>
-      <Canvas style={{ height: '100vh', width: '100vw', position: 'absolute', zIndex: "0" }} shadows>
+      <Canvas
+        style={{ height: '100vh', width: '100vw', position: 'absolute', zIndex: "0" }}
+        shadows
+        dpr={[1, 1]}
+      >
         <SetupRenderer />
         <Suspense fallback={null}>
-          <EffectComposer >
-            <N8AO  aoRadius={1} />
-            <Bloom luminanceThreshold={1} luminanceSmoothing={1} intensity={0.5}/>
+          <EffectComposer>
+            <N8AO aoRadius={1} />
+            <Bloom intensity={0.3} /> 
           </EffectComposer>
           <PerspectiveCamera
             makeDefault
@@ -230,4 +234,4 @@ function App() {
   );
 }
 
-export default App;
+export default memo(App);

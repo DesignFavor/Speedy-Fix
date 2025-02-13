@@ -17,7 +17,6 @@ const useSoundManager = () => {
     if (clickSound) {
       clickSound.currentTime = 0;
       clickSound.play().catch((error) => {
-        console.warn('Click sound play failed:', error);
       });
     }
   };
@@ -30,7 +29,6 @@ const useSoundManager = () => {
       if (bgMusic) {
         bgMusic.loop = true;
         bgMusic.play().catch((error) => {
-          console.warn('Background music play failed:', error);
         });
       }
       window.removeEventListener('click', playBackgroundMusic);
